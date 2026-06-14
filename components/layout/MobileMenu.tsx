@@ -56,7 +56,7 @@ const MobileMenu = forwardRef<HTMLDivElement, Props>(({ onClose }, ref) => {
         </div>
 
         {/* Resume */}
-        <a href={personal.resumePath} target="_blank" className="pt-8">
+        <a href={personal.resumePath} target="_blank" rel="noreferrer" className="pt-8">
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

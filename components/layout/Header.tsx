@@ -46,7 +46,7 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-7 mdl:inline-flex">
           <NavLinkList onClick={handleScroll} />
-          <a href={personal.resumePath} target="_blank">
+          <a href={personal.resumePath} target="_blank" rel="noreferrer">
             <motion.button
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
