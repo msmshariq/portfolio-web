@@ -10,7 +10,7 @@ const Contact = () => {
       className="cl:py-32 mx-auto flex h-full max-w-contentContainer flex-col items-center justify-center gap-6 py-10"
     >
       <p className="flex items-center font-codeFont text-lg font-semibold tracking-wide text-textGreen">
-        04. What&apos;s Next?
+        05. What&apos;s Next?
       </p>
       <h2 className="font-titleFont text-2xl font-semibold sm:text-3xl lgl:text-4xl">
         Let&apos;s get in touch

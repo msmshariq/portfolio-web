@@ -4,9 +4,11 @@ import Banner from "@/components/sections/Banner";
 import About from "@/components/sections/About";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
+import Recommendations from "@/components/sections/Recommendations";
 import Footer from "@/components/layout/Footer";
 import RightSide from "@/components/layout/RightSide";
 import { personal } from "@/constants/personal";
+import ChatBubble from "@/components/chat/ChatBubble";
 
 import type { Metadata } from "next";
 import Achievements from "@/components/sections/Achievements";
@@ -32,6 +34,7 @@ export default function HomePage() {
           <About />
           <Experience />
           <Achievements />
+          <Recommendations />
           <Contact />
           <Footer />
         </div>
@@ -39,6 +42,7 @@ export default function HomePage() {
           <RightSide />
         </div>
       </div>
+      <ChatBubble />
     </main>
   );
 }
