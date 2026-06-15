@@ -30,6 +30,7 @@ const ChatBubble = () => {
     const timer = setTimeout(() => {
       if (!isOpen) setShowPrompt(true);
     }, 4000);
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -92,6 +93,7 @@ const ChatBubble = () => {
               )
             );
             setIsTyping(false);
+
             return;
           }
           try {
@@ -103,7 +105,9 @@ const ChatBubble = () => {
                   : m
               )
             );
-          } catch {}
+          } catch (_e) {
+            // ignore malformed SSE token
+          }
         }
       }
     } catch {

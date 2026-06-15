@@ -27,6 +27,7 @@ const Recommendations = () => {
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(next, 7000);
+
     return () => clearInterval(timer);
   }, [isPaused, next]);
 

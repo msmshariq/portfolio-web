@@ -41,9 +41,9 @@ const ChatMessage = ({ message }: { message: Message }) => {
             <span className="h-2 w-2 animate-bounce rounded-full bg-textGreen/60 [animation-delay:300ms]" />
           </div>
         ) : (
-          <ReactMarkdown className="prose prose-invert prose-sm max-w-none">
-            {message.content}
-          </ReactMarkdown>
+          <div className="prose prose-invert prose-sm max-w-none">
+            <ReactMarkdown>{message.content}</ReactMarkdown>
+          </div>
         )}
       </div>
     </div>
