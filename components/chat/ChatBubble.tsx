@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IoChatbubbleEllipses, IoClose, IoSend } from "react-icons/io5";
+import { IoChatbubbleEllipses, IoClose, IoSend, IoExpand, IoContract } from "react-icons/io5";
 import Image from "next/image";
 import { profileImgCircle } from "@/public/assets";
 import ChatMessage, { Message } from "./ChatMessage";
@@ -16,9 +16,23 @@ const INTRO_MESSAGE: Message = {
     "Hi! I'm Digital Shariq — a virtual twin trained on my career, experience, and background. Ask me anything!",
 };
 
+const PROMPT_CHIPS = [
+  "What's your cloud architecture experience?",
+  "Tell me about Kubernetes at WSO2",
+  "How did you manage a $3M cloud budget?",
+  "What are your key SRE achievements?",
+];
+
+const SHAKE_KEYFRAMES = {
+  x: [0, -6, 6, -6, 6, -3, 3, 0],
+  transition: { duration: 0.6, repeat: Infinity, repeatDelay: 7 },
+};
+
 const ChatBubble = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [shouldNudge, setShouldNudge] = useState(false);
   const [messages, setMessages] = useState<Message[]>([INTRO_MESSAGE]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -35,8 +49,17 @@ const ChatBubble = () => {
   }, []);
 
   useEffect(() => {
+    const nudgeTimer = setTimeout(() => {
+      if (!isOpen) setShouldNudge(true);
+    }, 9000);
+
+    return () => clearTimeout(nudgeTimer);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       setShowPrompt(false);
+      setShouldNudge(false);
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [isOpen]);
@@ -127,6 +150,16 @@ const ChatBubble = () => {
     }
   };
 
+  const handleChip = (chip: string) => {
+    const userMsg: Message = {
+      id: `user-${Date.now()}`,
+      role: "user",
+      content: chip,
+    };
+    setMessages((prev) => [...prev, userMsg]);
+    callAPI(chip);
+  };
+
   const handleSend = () => {
     if (!input.trim() || isTyping) return;
     const text = input.trim();
@@ -147,8 +180,19 @@ const ChatBubble = () => {
     }
   };
 
+  const handleClose = () => {
+    setIsOpen(false);
+    setIsExpanded(false);
+  };
+
+  const showChips = messages.length === 1 && !isTyping;
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div
+      className={`fixed z-50 flex flex-col items-end gap-3 transition-all duration-300 ${
+        isExpanded && isOpen ? "bottom-0 right-0 top-0" : "bottom-6 right-6"
+      }`}
+    >
       {/* Chat window */}
       <AnimatePresence>
         {isOpen && (
@@ -157,7 +201,11 @@ const ChatBubble = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="flex h-[520px] w-[360px] flex-col overflow-hidden rounded-2xl border border-textGreen/20 bg-bodyColor shadow-2xl"
+            className={`flex flex-col overflow-hidden border border-textGreen/20 bg-bodyColor shadow-2xl transition-[width,height,border-radius] duration-300 ${
+              isExpanded
+                ? "h-full w-[40vw] min-w-[320px] rounded-l-2xl rounded-r-none"
+                : "h-[600px] w-[400px] rounded-2xl"
+            }`}
           >
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-textGreen/10 bg-[#0d1f3c] px-4 py-3">
@@ -174,11 +222,18 @@ const ChatBubble = () => {
                   Digital Shariq
                 </h3>
                 <p className="font-codeFont text-xs text-textGreen">
-                  Online · Replies instantly
+                  Cloudflare Workers · OpenAI
                 </p>
               </div>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsExpanded((prev) => !prev)}
+                className="rounded-full p-1.5 text-textDark transition-colors hover:bg-textGreen/10 hover:text-textGreen"
+                title={isExpanded ? "Collapse" : "Expand"}
+              >
+                {isExpanded ? <IoContract size={16} /> : <IoExpand size={16} />}
+              </button>
+              <button
+                onClick={handleClose}
                 className="rounded-full p-1.5 text-textDark transition-colors hover:bg-textGreen/10 hover:text-textGreen"
               >
                 <IoClose size={18} />
@@ -195,6 +250,19 @@ const ChatBubble = () => {
 
             {/* Input */}
             <div className="border-t border-textGreen/10 bg-[#0d1f3c] px-3 py-3">
+              {showChips && (
+                <div className="mb-3 flex flex-wrap gap-1.5">
+                  {PROMPT_CHIPS.map((chip) => (
+                    <button
+                      key={chip}
+                      onClick={() => handleChip(chip)}
+                      className="rounded-full border border-textGreen/20 bg-bodyColor px-3 py-1 font-codeFont text-[10px] text-textDark transition-colors hover:border-textGreen hover:text-textGreen"
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              )}
               <div className="flex items-center gap-2 rounded-xl border border-textGreen/20 bg-bodyColor px-3 py-2">
                 <input
                   ref={inputRef}
@@ -222,47 +290,58 @@ const ChatBubble = () => {
       </AnimatePresence>
 
       {/* Proactive prompt bubble */}
-      <AnimatePresence>
-        {showPrompt && !isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 16 }}
-            transition={{ duration: 0.3 }}
-            className="relative mr-2 max-w-[220px] cursor-pointer rounded-2xl rounded-br-sm border border-textGreen/20 bg-[#0d1f3c] px-4 py-2.5 shadow-lg"
-            onClick={() => setIsOpen(true)}
-          >
-            <p className="font-bodyFont text-xs text-textLight">
-              Ask me about my experience, skills, or background 👋
-            </p>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowPrompt(false);
-              }}
-              className="absolute -right-1.5 -top-1.5 rounded-full border border-textGreen/20 bg-[#0d1f3c] p-0.5 text-textDark hover:text-textGreen"
+      {!isExpanded && (
+        <AnimatePresence>
+          {showPrompt && !isOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 16 }}
+              transition={{ duration: 0.3 }}
+              className="relative mr-2 max-w-[220px] cursor-pointer rounded-2xl rounded-br-sm border border-textGreen/20 bg-[#0d1f3c] px-4 py-2.5 shadow-lg"
+              onClick={() => setIsOpen(true)}
             >
-              <IoClose size={10} />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <p className="font-bodyFont text-xs text-textLight">
+                Ask me about my experience, skills, or background 👋
+              </p>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowPrompt(false);
+                }}
+                className="absolute -right-1.5 -top-1.5 rounded-full border border-textGreen/20 bg-[#0d1f3c] p-0.5 text-textDark hover:text-textGreen"
+              >
+                <IoClose size={10} />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
 
       {/* Bubble button */}
-      <motion.button
-        onClick={() => setIsOpen((prev) => !prev)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2.5 rounded-full border border-textGreen/30 bg-[#0d1f3c] px-4 py-3 shadow-lg transition-colors hover:border-textGreen hover:bg-textGreen/10"
-      >
+      {!isExpanded && (
         <div className="relative">
-          <IoChatbubbleEllipses size={20} className="text-textGreen" />
-          <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-textGreen" />
+          {/* Pulsing attention ring */}
+          {shouldNudge && !isOpen && (
+            <span className="absolute inset-0 animate-ping rounded-full border-2 border-textGreen/40" />
+          )}
+          <motion.button
+            onClick={() => setIsOpen((prev) => !prev)}
+            animate={shouldNudge && !isOpen ? SHAKE_KEYFRAMES : { x: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2.5 rounded-full border border-textGreen/30 bg-[#0d1f3c] px-4 py-3 shadow-lg transition-colors hover:border-textGreen hover:bg-textGreen/10"
+          >
+            <div className="relative">
+              <IoChatbubbleEllipses size={20} className="text-textGreen" />
+              <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-textGreen" />
+            </div>
+            <span className="font-titleFont text-sm font-medium text-textLight">
+              Chat with Digital Shariq
+            </span>
+          </motion.button>
         </div>
-        <span className="font-titleFont text-sm font-medium text-textLight">
-          Chat with Digital Shariq
-        </span>
-      </motion.button>
+      )}
     </div>
   );
 };
