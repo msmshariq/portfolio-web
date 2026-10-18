@@ -13,13 +13,13 @@ import type { Metadata } from "next";
 import Achievements from "@/components/sections/Achievements";
 
 export const metadata: Metadata = {
-  title: "Freelance Azure & Cloud DevOps/SRE Consultant",
+  title: "Azure & Cloud DevOps/SRE Consultant",
   description:
-    "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE. Specializing in Kubernetes, Docker, containers, and WSO2 API integration & management for clients across the GCC and worldwide.",
+    "Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE. Specializing in Kubernetes, Docker, containers, and WSO2 API integration & management for clients across the GCC and worldwide.",
   openGraph: {
-    title: "Muhammed Shariq – Freelance Cloud, DevOps & SRE Consultant",
+    title: "Muhammed Shariq – Cloud, DevOps & SRE Consultant",
     description:
-      "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE. Kubernetes, Docker, and WSO2 API integration & management specialist.",
+      "Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE. Kubernetes, Docker, and WSO2 API integration & management specialist.",
     url: "https://msmshariq.com",
     siteName: "Muhammed Shariq",
     locale: "en_US",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muhammed Shariq – Freelance Cloud, DevOps & SRE Consultant",
+    title: "Muhammed Shariq – Cloud, DevOps & SRE Consultant",
     description:
-      "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE.",
+      "Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE.",
   },
   icons: {
     icon: "/favicon.ico",

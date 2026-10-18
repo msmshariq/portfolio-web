@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Muhammed Shariq – Freelance Cloud, DevOps & SRE Consultant";
+export const alt = "Muhammed Shariq – Cloud, DevOps & SRE Consultant";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -35,20 +35,22 @@ export default async function OpengraphImage() {
           gap: "60px",
         }}
       >
-        <img
-          src={imageSrc}
-          width={300}
-          height={300}
+        <div
           style={{
+            display: "flex",
+            width: 300,
+            height: 300,
             borderRadius: "50%",
             border: "6px solid #64ffda",
-            objectFit: "cover",
+            overflow: "hidden",
           }}
-        />
+        >
+          <img src={imageSrc} width={300} height={343} style={{ marginTop: -3 }} />
+        </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div style={{ fontSize: 56, fontWeight: 700, color: "#ccd6f6" }}>Muhammed Shariq</div>
           <div style={{ fontSize: 32, color: "#64ffda" }}>
-            Freelance Cloud, DevOps &amp; SRE Consultant
+            Cloud, DevOps &amp; SRE Consultant
           </div>
           <div style={{ fontSize: 24, color: "#8892b0" }}>
             Azure · AWS · GCP · Kubernetes · Docker · WSO2 API Integration

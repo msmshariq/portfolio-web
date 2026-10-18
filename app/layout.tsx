@@ -8,11 +8,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://msmshariq.com"),
   title: {
-    default: "Muhammed Shariq – Freelance Cloud, DevOps & SRE Consultant",
+    default: "Muhammed Shariq – Cloud, DevOps & SRE Consultant",
     template: "%s | Muhammed Shariq",
   },
   description:
-    "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE, serving the GCC and remote clients worldwide. Specialist in Kubernetes, Docker, containers, and WSO2 API integration & management.",
+    "Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE, serving the GCC and remote clients worldwide. Specialist in Kubernetes, Docker, containers, and WSO2 API integration & management.",
   alternates: {
     canonical: "/",
   },
