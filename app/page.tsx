@@ -7,15 +7,30 @@ import Contact from "@/components/sections/Contact";
 import Recommendations from "@/components/sections/Recommendations";
 import Footer from "@/components/layout/Footer";
 import RightSide from "@/components/layout/RightSide";
-import { personal } from "@/constants/personal";
 import ChatBubble from "@/components/chat/ChatBubble";
 
 import type { Metadata } from "next";
 import Achievements from "@/components/sections/Achievements";
 
 export const metadata: Metadata = {
-  title: personal.name,
-  description: "Cloud Platform Engineering Leader | SRE Specialist | DevSecOps Architect | 15+ years in cloud infrastructure and reliability engineering.",
+  title: "Freelance Azure & Cloud DevOps/SRE Consultant",
+  description:
+    "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE. Specializing in Kubernetes, Docker, containers, and WSO2 API integration & management for clients across the GCC and worldwide.",
+  openGraph: {
+    title: "Muhammed Shariq – Freelance Cloud, DevOps & SRE Consultant",
+    description:
+      "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE. Kubernetes, Docker, and WSO2 API integration & management specialist.",
+    url: "https://msmshariq.com",
+    siteName: "Muhammed Shariq",
+    locale: "en_US",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammed Shariq – Freelance Cloud, DevOps & SRE Consultant",
+    description:
+      "Freelance Azure, AWS & GCP cloud consultant and DevOps/SRE architect based in Dubai, UAE.",
+  },
   icons: {
     icon: "/favicon.ico",
   },

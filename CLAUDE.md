@@ -54,13 +54,11 @@ portfolio-web/
 │   └── personal.ts            # Centralized personal data (name, email, socials, CV)
 ├── public/
 │   ├── assets/
-│   │   ├── images/
-│   │   │   ├── LogoBig.png    # Header logo
-│   │   │   ├── Devon_circle.png   # Profile photo (placeholder)
-│   │   │   ├── Skills/        # Tech skill icons
-│   │   │   └── ProjectPictures/   # (unused, from template)
-│   │   ├── DevonGifford-...pdf    # (placeholder, replace with your CV)
-│   │   └── index.ts           # Asset exports
+│   │   ├── mages/              # Images (skill icons, profile photo)
+│   │   │   ├── shariq.png      # Profile photo
+│   │   │   └── skills/         # Tech skill icons
+│   │   ├── M_S_M_Shariq_CV.pdf # Resume/CV (downloadable)
+│   │   └── index.ts            # Asset exports
 │   └── favicon.ico
 ├── utils/
 │   └── TypeWriter.ts          # Typewriter animation logic
@@ -136,12 +134,11 @@ Array of 6 achievements with:
 
 Edit the `achievements` array to customize.
 
-### Page Metadata
+### Page Metadata & SEO
 
-**File:** `app/page.tsx:13–19`
+**Files:** `app/layout.tsx` (site-wide defaults, title template, canonical, JSON-LD structured data) and `app/page.tsx` (homepage title, description, Open Graph/Twitter tags).
 
-- `title`: Browser tab title (wired to `personal.name`)
-- `description`: SEO meta description
+Also see `app/robots.ts`, `app/sitemap.ts`, and `app/opengraph-image.tsx` (dynamic social preview image).
 
 ### Navigation Menu
 
@@ -231,9 +228,9 @@ Build with `npm run build`, then serve `.next/` folder with any Node.js server.
 
 - **No Database:** This is a static site. No backend needed.
 - **Social Links & Email:** Centralized in `constants/personal.ts`. Update once, syncs everywhere.
-- **CV/Resume:** Replace `public/assets/M_S_M_Shariq_CV.pdf` with your own. Update path in `personal.ts`.
-- **Profile Photo:** Replace `public/assets/images/Devon_circle.png` with your own photo. Re-export in `public/assets/index.ts` if you rename.
-- **Skills Icons:** Tech skill icons live in `public/assets/images/Skills/`. Add/remove PNGs and update the skills array in `About.tsx`.
+- **CV/Resume:** `public/assets/M_S_M_Shariq_CV.pdf`, path set in `personal.ts`.
+- **Profile Photo:** `public/assets/mages/shariq.png`. Re-export in `public/assets/index.ts` if you rename.
+- **Skills Icons:** Tech skill icons live in `public/assets/mages/skills/`. Add/remove icons and update the skills array in `About.tsx`.
 - **TypeScript:** Strict mode enabled. All files should be `.tsx` or `.ts`.
 - **No Tests:** This is a portfolio, not a library. No test suite needed.
 
