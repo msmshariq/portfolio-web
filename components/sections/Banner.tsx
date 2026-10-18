@@ -27,13 +27,13 @@ const Banner: React.FC = () => {
       {/* Heading */}
       <motion.h3
         className="font-codeFont text-xs tracking-wide text-textGreen md:text-lg"
-        {...fadeIn(2)}
+        {...fadeIn(0)}
       >
         Hello World, my name is
       </motion.h3>
 
       <motion.h1
-        {...fadeIn(2.2)}
+        {...fadeIn(0.1)}
         className="flex flex-col font-titleFont text-3xl font-semibold md:text-4xl lgl:text-6xl"
       >
         {personal.name}.
@@ -55,7 +55,7 @@ const Banner: React.FC = () => {
 
       {/* Bio Text */}
       <motion.div
-        {...fadeIn(2.4)}
+        {...fadeIn(0.2)}
         className="flex flex-col gap-1.5 text-sm font-medium text-textDark sml:text-base"
       >
         <p>
@@ -79,7 +79,7 @@ const Banner: React.FC = () => {
       </motion.div>
 
       {/* CV Download 'Button' */}
-      <motion.div {...fadeIn(2.5)}>
+      <motion.div {...fadeIn(0.3)}>
         <a
           href={personal.resumePath}
           download

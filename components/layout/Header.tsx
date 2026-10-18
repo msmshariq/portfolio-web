@@ -50,7 +50,7 @@ export default function Header() {
             <motion.button
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.25 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="rounded-md border border-textGreen px-4 py-2 text-[13px] text-textGreen duration-300 hover:bg-hoverColor"
             >
               Resume
