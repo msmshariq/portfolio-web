@@ -118,6 +118,8 @@ const Recommendations = () => {
                   setDirection(i > current ? 1 : -1);
                   setCurrent(i);
                 }}
+                aria-label={`Go to recommendation ${i + 1}`}
+                aria-current={i === current}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === current
                     ? "w-6 bg-textGreen"
@@ -131,12 +133,14 @@ const Recommendations = () => {
           <div className="flex gap-2">
             <button
               onClick={prev}
+              aria-label="Previous recommendation"
               className="rounded-full border border-textGreen/20 p-2 text-textDark transition-all hover:border-textGreen hover:text-textGreen"
             >
               <MdChevronLeft size={20} />
             </button>
             <button
               onClick={next}
+              aria-label="Next recommendation"
               className="rounded-full border border-textGreen/20 p-2 text-textDark transition-all hover:border-textGreen hover:text-textGreen"
             >
               <MdChevronRight size={20} />

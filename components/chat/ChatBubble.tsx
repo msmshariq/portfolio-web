@@ -228,12 +228,14 @@ const ChatBubble = () => {
               <button
                 onClick={() => setIsExpanded((prev) => !prev)}
                 className="rounded-full p-1.5 text-textDark transition-colors hover:bg-textGreen/10 hover:text-textGreen"
+                aria-label={isExpanded ? "Collapse chat" : "Expand chat"}
                 title={isExpanded ? "Collapse" : "Expand"}
               >
                 {isExpanded ? <IoContract size={16} /> : <IoExpand size={16} />}
               </button>
               <button
                 onClick={handleClose}
+                aria-label="Close chat"
                 className="rounded-full p-1.5 text-textDark transition-colors hover:bg-textGreen/10 hover:text-textGreen"
               >
                 <IoClose size={18} />
@@ -276,6 +278,7 @@ const ChatBubble = () => {
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isTyping}
+                  aria-label="Send message"
                   className="rounded-lg p-1.5 text-textGreen transition-all hover:bg-textGreen/10 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   <IoSend size={16} />
@@ -309,6 +312,7 @@ const ChatBubble = () => {
                   e.stopPropagation();
                   setShowPrompt(false);
                 }}
+                aria-label="Dismiss"
                 className="absolute -right-1.5 -top-1.5 rounded-full border border-textGreen/20 bg-[#0d1f3c] p-0.5 text-textDark hover:text-textGreen"
               >
                 <IoClose size={10} />
