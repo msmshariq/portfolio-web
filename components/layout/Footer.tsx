@@ -13,6 +13,7 @@ const Footer = () => {
       <div className="inline-flex w-full items-center justify-center gap-4 xl:hidden">
         <SocialIcon
           href={personal.socials.github}
+          label="GitHub"
           externalClassName="bg-bodyColor text-zinc-200 border-zinc-700"
         >
           <SiGithub />
@@ -20,6 +21,7 @@ const Footer = () => {
 
         <SocialIcon
           href={personal.socials.linkedin}
+          label="LinkedIn"
           externalClassName="bg-bodyColor text-zinc-200 border-zinc-700"
         >
           <BsLinkedin />
@@ -27,6 +29,7 @@ const Footer = () => {
 
         <SocialIcon
           href={personal.socials.twitter}
+          label="Twitter"
           externalClassName="bg-bodyColor text-zinc-200 border-zinc-700"
         >
           <TiSocialTwitter />

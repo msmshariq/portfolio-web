@@ -34,10 +34,10 @@ export default function Header() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <a href="#home" className="hover:animate-spin">
+          <a href="#home" aria-label="Home" className="hover:animate-spin">
             <Image
               src={logo}
-              alt="logo"
+              alt=""
               className="mt-2 w-10 rounded-full hover:animate-spin sml:w-12"
             />
           </a>
@@ -59,14 +59,17 @@ export default function Header() {
         </nav>
 
         {/* Mobile Hamburger */}
-        <div
+        <button
+          type="button"
           onClick={() => setShowMenu(true)}
+          aria-label="Open menu"
+          aria-expanded={showMenu}
           className="group flex h-5 w-6 cursor-pointer flex-col items-center justify-between overflow-hidden text-4xl text-textGreen mdl:hidden"
         >
-          <span className="inline-flex h-[2px] w-full bg-textGreen transition-all duration-300 ease-in-out group-hover:translate-x-2" />
-          <span className="inline-flex h-[2px] w-full bg-textGreen transition-all duration-300 ease-in-out" />
-          <span className="inline-flex h-[2px] w-full bg-textGreen transition-all duration-300 ease-in-out group-hover:translate-x-3" />
-        </div>
+          <span aria-hidden="true" className="inline-flex h-[2px] w-full bg-textGreen transition-all duration-300 ease-in-out group-hover:translate-x-2" />
+          <span aria-hidden="true" className="inline-flex h-[2px] w-full bg-textGreen transition-all duration-300 ease-in-out" />
+          <span aria-hidden="true" className="inline-flex h-[2px] w-full bg-textGreen transition-all duration-300 ease-in-out group-hover:translate-x-3" />
+        </button>
 
         {/* Mobile Menu */}
         {showMenu && <MobileMenu ref={menuRef} onClose={() => setShowMenu(false)} />}

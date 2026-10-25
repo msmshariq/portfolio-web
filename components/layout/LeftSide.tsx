@@ -17,17 +17,19 @@ const LeftSide = () => {
         transition={{ duration: 1.5, delay: 3 }}
         className="flex flex-col gap-4"
       >
-        <SocialIcon href={personal.socials.github} externalClassName="bg-hoverColor text-textLight">
+        <SocialIcon href={personal.socials.github} label="GitHub" externalClassName="bg-hoverColor text-textLight">
           <SiGithub />
         </SocialIcon>
         <SocialIcon
           href={personal.socials.linkedin}
+          label="LinkedIn"
           externalClassName="bg-hoverColor text-textLight"
         >
           <BsLinkedin />
         </SocialIcon>
         <SocialIcon
           href={personal.socials.twitter}
+          label="Twitter"
           externalClassName="bg-hoverColor text-textLight"
         >
           <TiSocialTwitter />

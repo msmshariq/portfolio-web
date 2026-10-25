@@ -11,13 +11,13 @@ export default function SocialIconList({ className }: { className?: string }) {
 
   return (
     <div className={`flex gap-4 ${className}`}>
-      <SocialIcon href={personal.socials.github} externalClassName={baseClass}>
+      <SocialIcon href={personal.socials.github} label="GitHub" externalClassName={baseClass}>
         <SiGithub />
       </SocialIcon>
-      <SocialIcon href={personal.socials.linkedin} externalClassName={baseClass}>
+      <SocialIcon href={personal.socials.linkedin} label="LinkedIn" externalClassName={baseClass}>
         <BsLinkedin />
       </SocialIcon>
-      <SocialIcon href={personal.socials.twitter} externalClassName={baseClass}>
+      <SocialIcon href={personal.socials.twitter} label="Twitter" externalClassName={baseClass}>
         <TiSocialTwitter />
       </SocialIcon>
     </div>

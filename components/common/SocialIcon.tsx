@@ -4,6 +4,7 @@ import React from "react";
 
 interface SocialIconProps {
   href: string;
+  label: string;
   children: React.ReactNode;
   hoverColor?: string;
   externalClassName?: string;
@@ -11,13 +12,15 @@ interface SocialIconProps {
 
 const SocialIcon: React.FC<SocialIconProps> = ({
   href,
+  label,
   children,
   hoverColor = "hover:text-textGreen",
   externalClassName = "",
 }) => {
   return (
-    <a href={href} target="_blank" rel="noreferrer">
+    <a href={href} target="_blank" rel="noreferrer" aria-label={label}>
       <span
+        aria-hidden="true"
         className={`inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-xl transition-all duration-300 hover:-translate-y-2 ${hoverColor} ${externalClassName}`}
       >
         {children}

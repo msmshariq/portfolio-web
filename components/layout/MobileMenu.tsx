@@ -45,10 +45,14 @@ const MobileMenu = forwardRef<HTMLDivElement, Props>(({ onClose }, ref) => {
         className="scrollbar-hide relative flex h-full w-[80%] flex-col items-center bg-[#112240] px-4 py-16"
       >
         {/* Close Icon */}
-        <MdOutlineClose
+        <button
+          type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 cursor-pointer text-3xl text-textGreen hover:text-textGreen/80"
-        />
+          aria-label="Close menu"
+          className="absolute right-4 top-4 text-textGreen hover:text-textGreen/80"
+        >
+          <MdOutlineClose aria-hidden="true" className="text-3xl" />
+        </button>
 
         {/* Nav Items */}
         <div className="flex w-[80%] flex-col items-center gap-8 text-center text-base">
